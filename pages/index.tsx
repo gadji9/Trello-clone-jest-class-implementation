@@ -1,65 +1,75 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import { useEffect, useState } from "react";
 
-import styles from '@/pages/index.module.css'
+import Category from "@/components/blocks/category/Category";
+import CreateCategoryModal from "@/components/modals/CreateCategory";
+
+import System from "@/entities/System/System";
+import CategoryEntity from "@/entities/category/Category";
+import CardEntity from "@/entities/Card/Card";
+
+import DefaultLayout from "@/layouts/DefaultLayout";
+import Plus from "@/assets/icons/plus";
 
 export default function Home() {
+  const [system, setSystem] = useState(new System([]));
+
+  const [createCategoryModal, setCreateCategoryModal] = useState(false);
+  const [draggingCard, setDraggingCard] = useState<CardEntity>();
+  const [draggingCategory, setDraggingCategory] = useState<CategoryEntity>();
+
+  useEffect(() => {
+    system.init();
+    updateSystem();
+  }, []);
+
+  function onCategoryCreate(name: string) {
+    system.createCategory(name);
+    updateSystem();
+  }
+
+  function onCategoryDelete(category: CategoryEntity) {
+    system.destroyCategory(category);
+    updateSystem();
+  }
+
+  function updateSystem() {
+    setSystem(system.getCopySystem());
+  }
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a href="https://vercel.com/new" className={styles.card}>
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <>
+      <DefaultLayout>
+        <div>
+          <div className="w-full flex justify-end">
+            <div
+              className="cursor-pointer hover:opacity-80 transition"
+              onClick={() => setCreateCategoryModal(true)}
+              data-testid="open-category-modal"
+            >
+              <Plus />
+            </div>
+          </div>
         </div>
-      </main>
+        <div className="flex gap-5">
+          {system.categories.map((category) => (
+            <div className="min-w-[300px]" key={category.id}>
+              <Category
+                category={category}
+                draggingCategory={draggingCategory}
+                setDraggingCategory={setDraggingCategory}
+                setDraggingCard={setDraggingCard}
+                draggingCard={draggingCard}
+                onDelete={() => onCategoryDelete(category)}
+              />
+            </div>
+          ))}
+        </div>
+      </DefaultLayout>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
-  )
+      <CreateCategoryModal
+        state={createCategoryModal}
+        setState={setCreateCategoryModal}
+        onSave={onCategoryCreate}
+      />
+    </>
+  );
 }
