@@ -77,12 +77,12 @@ const CreateCardModal: FunctionComponent<ICreateCardModal> = ({
             <p className="font-semibold">Описание карточки</p>
             <Editor
               onInit={(evt, editor) => (editorRef.current = editor)}
+              initialValue=""
               apiKey={process.env.NEXT_PUBLIC_TINYMCE_API}
-              onEditorChange={(content) => setDescription(content)}
-              id="card-description"
               init={{
                 height: 300,
                 max_height: 300,
+                menubar: false,
 
                 toolbar:
                   "undo redo | formatselect | " +

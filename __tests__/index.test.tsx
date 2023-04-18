@@ -1,10 +1,6 @@
 import { render, screen, fireEvent, within } from "@testing-library/react";
 
-import CategoryEntity from "@/entities/category/Category";
 import Home from "../pages";
-
-import Category from "@/components/blocks/category/Category";
-import { useState } from "react";
 
 test("Create category", () => {
   render(<Home />);
