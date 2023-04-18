@@ -1,4 +1,4 @@
-import SystemEntity from "@/entities/System/System";
+import SystemEntity from "@/entities/system/System";
 
 const localStorageMock = (function () {
   let store: any = {};

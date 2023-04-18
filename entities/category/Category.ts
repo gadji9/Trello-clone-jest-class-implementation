@@ -1,4 +1,4 @@
-import Card from "@/entities/Card/Card";
+import Card from "@/entities/card/Card";
 
 class Category {
   id: string | number;

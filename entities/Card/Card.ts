@@ -12,4 +12,5 @@ class Card {
     this.status = status;
   }
 }
+
 export default Card;

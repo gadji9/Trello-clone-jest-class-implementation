@@ -48,4 +48,5 @@ class System {
     localStorage.setItem("categories", JSON.stringify(this.categories));
   }
 }
+
 export default System;

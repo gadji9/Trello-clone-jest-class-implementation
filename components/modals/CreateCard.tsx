@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-import CardEntity from "@/entities/Card/Card";
+import CardEntity from "@/entities/card/Card";
 
 import Trash from "@/assets/icons/trash";
 

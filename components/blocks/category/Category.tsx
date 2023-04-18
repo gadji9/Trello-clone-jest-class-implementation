@@ -2,7 +2,7 @@ import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
 import { DragEvent } from "react";
 
 import CategoryEntity from "entities/category/Category";
-import CardEntity from "@/entities/Card/Card";
+import CardEntity from "@/entities/card/Card";
 
 import Trash from "@/assets/icons/trash";
 import Plus from "@/assets/icons/plus";

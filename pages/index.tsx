@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import Category from "@/components/blocks/category/Category";
 import CreateCategoryModal from "@/components/modals/CreateCategory";
 
-import System from "@/entities/System/System";
+import System from "@/entities/system/System";
 import CategoryEntity from "@/entities/category/Category";
-import CardEntity from "@/entities/Card/Card";
+import CardEntity from "@/entities/card/Card";
 
 import DefaultLayout from "@/layouts/DefaultLayout";
 import Plus from "@/assets/icons/plus";
