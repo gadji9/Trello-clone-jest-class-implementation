@@ -107,7 +107,6 @@ const Category: FunctionComponent<{
               onDrop={(e) => onDrop(e)}
               onDragEnd={(e) => onDragEnd(e)}
               onDragLeave={(e) => onDragLeave(e)}
-              draggable={true}
             >
               Карточек пока нет
             </div>
